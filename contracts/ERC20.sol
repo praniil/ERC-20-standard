@@ -35,4 +35,10 @@ contract ERC20 {
     function balanceOf(address owner) public view returns (uint) {
         return balance[owner];
     }
+
+    function burn(uint amount) public {
+        require(balance[msg.sender] > amount, "Insufficient fund to burn");
+        balance[msg.sender] = balance[msg.sender] - amount;
+        _totalSupply = _totalSupply - amount;
+    }
 }
